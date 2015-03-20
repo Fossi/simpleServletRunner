@@ -1,0 +1,14 @@
+build/
+gradle/
+.gradle/
+out/
+.classpath
+.project
+.idea/
+*.iml
+*.ipr
+target
+*.swp
+.vagrant
+*.war
+*.jar

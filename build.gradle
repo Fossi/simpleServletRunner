@@ -1,0 +1,25 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+version = '1.0'
+def groovy_version ='2.4.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.eclipse.jetty:jetty-webapp:9.2.9.v20150224"
+    compile "org.codehaus.groovy:groovy-all:${groovy_version}"
+}
+
+task packMe(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'runner for simple servlet',
+                'Implementation-Version': version,
+                'Main-Class': 'com.ffoerster.greach.simpleservlet.SimpleServletRunner'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
